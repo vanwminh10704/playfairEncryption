@@ -163,5 +163,5 @@ result_text = tk.Text(app, height=4, width=25)
 result_text.grid(row=3, column=1, padx=5, pady=5, sticky="w")
 
 # Set window size and start event loop
-app.geometry("500x500")
+app.geometry("350x350")
 app.mainloop()
