@@ -117,8 +117,9 @@ def decrypt(ciphertext, key_square):
 
 # Function to handle the encryption/decryption process
 def process(selected_option):
-    plaintext = plaintext_entry.get("1.0", tk.END)
-    key = key_entry.get()
+    plaintext = message_entry.get("1.0", tk.END)
+    key = key_entry.get("1.0", tk.END)
+    key = key.strip()  # Remove leading/trailing whitespace
     key_square = generateKeyTable(key)
 
     # Clear the result text box before displaying new result
@@ -132,35 +133,26 @@ def process(selected_option):
     result_text.insert("1.0", result)
 
 # GUI elements
-plaintext_label = ttk.Label(app, text="Enter Message:")
-plaintext_label.grid(row=0, column=0, padx=5, pady=5, sticky="w")
-plaintext_entry = tk.Text(app, height=4, width=25)
-plaintext_entry.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+message_label = ttk.Label(app, text="Enter Message:")
+message_label.place(x=30, y=10)
+message_entry = tk.Text(app, height=3, width=20)
+message_entry.place(x=30, y=30)
 
 key_label = ttk.Label(app, text="Enter Key:")
-key_label.grid(row=1, column=0, padx=5, pady=5, sticky="w")
-key_entry = ttk.Entry(app)
-key_entry.grid(row=1, column=1, padx=5, pady=5, sticky="w")
+key_label.place(x=30, y=80)
+key_entry = tk.Text(app, height=3, width=20)
+key_entry.place(x=30, y=100)
 
-# Get the position of the plaintext_entry widget
-info = plaintext_entry.grid_info()
-
-# Determine the columnspan value for the Encrypt and Decrypt buttons
-columnspan_value = max((info['columnspan'] - 1) // 2, 1)
-
-# Set the columnspan value for the Encrypt button
 encrypt_button = ttk.Button(app, text="Encrypt", command=lambda: process("Encrypt"))
-encrypt_button.grid(row=2, column=0, padx=(5, 0), pady=5, sticky="w", columnspan=columnspan_value)
+encrypt_button.place(x=30, y=155)
 
-# Set the columnspan value for the Decrypt button
-decrypt_columnspan = max((info['columnspan'] - 1) // 2, 1)
 decrypt_button = ttk.Button(app, text="Decrypt", command=lambda: process("Decrypt"))
-decrypt_button.grid(row=2, column=1, padx=(0, 5), pady=5, sticky="e", columnspan=decrypt_columnspan)
+decrypt_button.place(x=140, y=155)
 
 result_label = ttk.Label(app, text="Result:")
-result_label.grid(row=3, column=0, padx=5, pady=5, sticky="w")
-result_text = tk.Text(app, height=4, width=25)
-result_text.grid(row=3, column=1, padx=5, pady=5, sticky="w")
+result_label.place(x=30, y=200)
+result_text = tk.Text(app, height=3, width=20)
+result_text.place(x=30, y=220)
 
 # Set window size and start event loop
 app.geometry("350x350")
